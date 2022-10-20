@@ -257,13 +257,22 @@ class IBlockAndSection
             $asset = Asset::getInstance();
             $asset->addString('
 <script type="text/javascript">
-    (function($, window, document) {
-        $(document).ready(function() {
-            $(\'.frizus-reviews-iblock-and-section\').bitrixIBlockAndSection({
+    (function($, window, document, BX) {
+        function selectIBlockAndSection() {
+            $(\'.frizus-reviews-iblock-and-section:visible\').bitrixIBlockAndSection({
                 url: \'/bitrix/tools/frizus.reviews/section.php\'
             })
+        }
+        
+        $(document).ready(function() {
+            selectIBlockAndSection()
+            if (typeof BX !== typeof undefined) {
+                BX.addCustomEvent("Grid::thereEditedRows", function(event) {
+                    selectIBlockAndSection()
+                })       
+            }
         })
-    })(jQuery, window, document)
+    })(jQuery, window, document, BX)
 </script>
 ');
         }
