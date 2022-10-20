@@ -1,5 +1,3 @@
-# test-work2
-
 # Установка
 1. Скопировать репозиторий в папку `frizus.reviews` в папку проекта `/local/modules/`
 2. Установить модуль [sprint.migration](https://github.com/andreyryabin/sprint.migration)
