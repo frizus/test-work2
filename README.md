@@ -1,7 +1,6 @@
 # Установка
 1. Скопировать репозиторий в папку `frizus.reviews` в папку проекта `/local/modules/`
-2. Установить модуль [sprint.migration](https://github.com/andreyryabin/sprint.migration)
-3. Добавить в `/bitrix/.settings.php`
+2. Добавить в `/bitrix/.settings.php`
 ```php
   'routing' => [
       'value' => [
@@ -9,8 +8,7 @@
       ],
   ],
 ```
-и заменить в .htaccess
-
+3. Заменить в .htaccess
 ```apache
 RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
 RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
@@ -20,10 +18,22 @@ RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
 RewriteCond %{REQUEST_FILENAME} !/bitrix/routing_index.php$
 RewriteRule ^(.*)$ /bitrix/routing_index.php [L]
 ```
-4. Установить модуль `frizus.reviews`, `spint.migration`
-5. Установить миграции `Настройки -> Миграции для разработчиков -> Миграции (cfg)`
-6. Задать инфоблок отзывов в `/bitrix/admin/settings.php?mid=frizus.reviews`
-7. Смотреть вывод отзывов по ссылке `/api/reviews`
+4. Создать файл `/local/routes/api.php` с содержимым:
+```php
+<?php
+
+use Bitrix\Main\Routing\RoutingConfigurator;
+use Frizus\Reviews\Controller\Reviews;
+
+return function (RoutingConfigurator $routes) {
+    $routes->get('/api/reviews', [Reviews::class, 'index']);
+};
+```
+5. Установить модуль [sprint.migration](https://github.com/andreyryabin/sprint.migration)
+6. Установить модуль `frizus.reviews`, `spint.migration`
+7. Установить миграции `Настройки -> Миграции для разработчиков -> Миграции (cfg)`
+8. Задать инфоблок отзывов в `/bitrix/admin/settings.php?mid=frizus.reviews`
+9. Смотреть вывод отзывов по ссылке `/api/reviews`
 
 # Использование
 Поддерживаются параметры запроса `limit` и `page`. По умолчанию `limit` равен `10`.
