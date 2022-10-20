@@ -99,7 +99,7 @@ class Reviews extends Controller
         if (!isset($page) ||
             ($page === '') ||
             (filter_var($page, FILTER_VALIDATE_INT) === false) ||
-            !(intval($page) > -1)
+            !(intval($page) > 0)
         ) {
             $page = 1;
         } else {
