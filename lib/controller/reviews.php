@@ -81,7 +81,7 @@ class Reviews extends Controller
             (filter_var($limit, FILTER_VALIDATE_INT) === false) ||
             !(intval($limit) > 0)
         ) {
-            $limit = 100;
+            $limit = 10;
         } else {
             $limit = intval($limit);
             if ($limit > 500) {
