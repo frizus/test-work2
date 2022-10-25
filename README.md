@@ -8,7 +8,7 @@
       ],
   ],
 ```
-3. Заменить в .htaccess
+3. Заменить в `.htaccess`
 ```apache
 RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
 RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
